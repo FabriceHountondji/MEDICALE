@@ -1,0 +1,78 @@
+<?php
+
+namespace App\Repositories;
+
+use App\Traits\Repository;
+use [model_namespace]; [comment_namespace_when_no_model]
+
+class DummyClass
+{
+    use Repository;
+
+    /**
+     * The model being queried.
+     *
+     * @var Model
+     */
+    protected $model;
+    
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        [comment_when_no_model]
+        $this->model = app([model]::class);
+    }
+
+    /**
+     * Check if exists
+     */
+    public function ifExist($id)
+    {
+        return $this->find($id);
+    }
+
+    /**
+     * Get an element
+     */
+    public function get($id)
+    {
+        return $this->findOrFail($id);
+    }
+
+    /**
+     * To store model
+     */
+    public function makeStore($data): [model]{
+        $[model_object] = new [model]($data);
+        $[model_object]->save();
+        return $[model_object];
+    }
+
+    /**
+     * To update model
+     */
+    public function makeUpdate($id, $data): [model]{
+        $[model_object] = [model]::findOrFail($id);
+        $[model_object]->update($data);
+        return $[model_object];
+    }
+
+    /**
+     * To delete model
+     */
+    public function makeDestroy($id)
+    {
+        return $this->findOrFail($id)->delete();
+    }
+
+    /**
+     * To get all latest
+     */
+    public function getlatest()
+    {
+        return $this->latest()->get();
+    }
+}

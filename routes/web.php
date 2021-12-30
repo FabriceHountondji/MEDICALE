@@ -29,3 +29,9 @@ Route::post('/login', 'App\Http\Controllers\Auth\LoginController@authenticate')-
 Route::get('/logout', 'App\Http\Controllers\Auth\LogoutController@logout')->name('logout');
 
 // FIN LOGIN ET DECONNEXION
+
+// DASHBOARD
+
+Route::get('/dashboard', 'App\Http\Controllers\DashboardController@index')->name('dashboard');
+
+// FIN DASHBOARD

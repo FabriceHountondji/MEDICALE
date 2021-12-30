@@ -2,17 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Role;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Intervention\Image\Facades\Image as Image;
 use Carbon\Carbon;
 use App\Mail\ConfirmationMail;
 use Illuminate\Support\Str;
 
-class PatientController extends Controller
+class InfirmierController extends Controller
 {
+
+
     public function __construct()
     {
         $this->middleware('auth');
@@ -24,9 +26,9 @@ class PatientController extends Controller
      */
     public function index()
     {
-        $title = 'Liste des patients';
-        $users = User::orderBy('name')->whereRoleId(2)->get();
-        return view('dashboard/patient/index', compact('title','users'));
+        $title = 'Liste des infirmiers';
+        $users = User::orderBy('name')->whereRoleId()->get();
+        return view('dashboard/infirmier/index', compact('title','users'));
     }
 
     /**
@@ -36,10 +38,10 @@ class PatientController extends Controller
      */
     public function create()
     {
-        $title = 'Nouveau Patient';
+        $title = 'Nouveau Infirmier';
         $roles = Role::where('name', 'admin')
-                        ->orWhere('name', 'patient')->get();
-        return view('dashboard/patient/create', compact('title', 'roles'));
+                        ->orWhere('name', 'infirmier')->get();
+        return view('dashboard/infirmier/create', compact('title', 'roles'));
     }
 
     /**
@@ -98,7 +100,7 @@ class PatientController extends Controller
     public function show(User $user)
     {
         $title = 'Details '.$user->name;
-        return view('dashboard/patient/show', compact('title', 'users'));
+        return view('dashboard/infirmier/show', compact('title', 'users'));
     }
 
     /**
@@ -135,4 +137,5 @@ class PatientController extends Controller
         $user->delete();
         return back();
     }
+
 }

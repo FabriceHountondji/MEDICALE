@@ -32,27 +32,48 @@
 
 	<div class="container-login100" style="background-image: url('/storage/login_fichiers/images/bg-01.jpg');">
 		<div class="wrap-login100 p-l-55 p-r-55 p-t-80 p-b-30">
-			<form class="login100-form validate-form" action="">
-				<span class="login100-form-title p-b-37">
+			<form class="login100-form validate-form" action="{{ route('authenticate') }}" method="POST">
+
+                @csrf
+
+                <span class="login100-form-title p-b-37">
 					Se connecter
 				</span>
+                @if (session('error'))
+                    <div class="alert alert-danger">
+                        <strong>Attention !</strong> {{ session('error') }}
+                    </div>
+                @endif
+
+                <div class="card-body">
+
+                    @if (session('error'))
+                    <div class="alert alert-warning alert-dismissible">
+
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        <h5><i class="icon fas fa-ban"></i> Alert!</h5>
+
+                        <strong> Attention !</strong> {{ session('error') }}
+                    </div>
+                    @endif
+                </div>
 
 				<div class="wrap-input100 validate-input m-b-20" data-validate="Enter username or email">
-					<input class="input100" type="text" name="username" placeholder="username or email">
-					<span class="focus-input100"></span>
+                    <input class="input100" type="text" name="username" placeholder="username or email">
+                    <span class="focus-input100"></span>
 				</div>
 
 				<div class="wrap-input100 validate-input m-b-25" data-validate = "Enter password">
-					<input class="input100" type="password" name="pass" placeholder="password">
-					<span class="focus-input100"></span>
+                    <input class="input100" type="password" name="pass" placeholder="password">
+                    <span class="focus-input100"></span>
 				</div>
 
 				<div class="container-login100-form-btn">
-					<button class="login100-form-btn">
-						Valider
+					<button class="login100-form-btn" type="submit">
+						Connexion
 					</button>
 				</div>
-<br>
+                <br>
                 <div class="container-login100-form-btn">
                     <a href="">
                         <button class="login100-form-btn">
